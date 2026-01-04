@@ -1,8 +1,7 @@
 
 import { prisma } from "./prisma"
-
-const bcrypt = require('bcrypt')
-var jwt = require('jsonwebtoken')
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production"
 
 export interface User {
@@ -76,7 +75,7 @@ export function verifyToken(token: string): User | null {
     try {
         const decoded = jwt.verify(token, JWT_SECRET) as User
         return decoded
-    } catch (error) {
+    } catch {
         return null
     }
 }

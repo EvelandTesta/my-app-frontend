@@ -49,27 +49,26 @@ export default function MemberManagement() {
     try {
       const response = await fetch("/api/member")
       if (response.ok) {
-        const data = await response.json()
+        const data: Member[] = await response.json() 
         setMembers(
-          data.map((member: any) => ({
+          data.map((member) => ({
             id: member.id,
             name: member.name,
-            age: member.age || 0,
-            gender: member.gender || "",
-            email: member.email || "",
-            phone: member.phone || "",
-            role: member.role || "Member",
-            joinDate: member.join_date || new Date().toISOString().split("T")[0],
-          })),
+            age: member.age ?? 0,
+            gender: member.gender ?? "",
+            email: member.email ?? "",
+            phone: member.phone ?? "",
+            role: member.role ?? "Member",
+            joinDate: member.joinDate ? member.joinDate.split("T")[0] : new Date().toISOString().split("T")[0],
+          }))
         )
       }
-      setLoading(false)
     } catch (error) {
       console.error("Error fetching members:", error)
-      setLoading(false)
+    } finally {
+      setLoading(false) 
     }
   }
-
 
   const handleAddMember = async () => {
     try {

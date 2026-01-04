@@ -9,7 +9,7 @@ interface Event {
   description: string
   eventDate: string
   eventTime: string
-  location: string
+  location: string 
   eventType: string
 }
 
@@ -33,21 +33,21 @@ export default function Calendar() {
     fetchEvents()
   }, [])
 
-  const fetchEvents = async () => {
+    const fetchEvents = async () => {
     try {
       const response = await fetch("/api/event")
       if (response.ok) {
-        const data = await response.json()
+        const data: Event[] = await response.json() 
         setEvents(
-          data.map((event: any) => ({
+          data.map((event) => ({
             id: event.id,
             title: event.title,
             description: event.description || "",
-            eventDate: event.eventDate.split("T")[0],
+            eventDate: event.eventDate.split("T")[0], 
             eventTime: event.eventTime,
             location: event.location || "",
             eventType: event.eventType,
-          })),
+          }))
         )
       }
     } catch (error) {

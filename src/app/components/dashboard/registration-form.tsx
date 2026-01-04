@@ -51,9 +51,9 @@ export default function RegistrationForm() {
     try {
       const response = await fetch("/api/registration")
       if (response.ok) {
-        const data = await response.json()
+        const data: Registration[] = await response.json()
         setRegistrations(
-          data.map((reg: any) => ({
+          data.map((reg) => ({
             id: reg.id,
             name: reg.name,
             email: reg.email,
@@ -61,10 +61,10 @@ export default function RegistrationForm() {
             age: reg.age?.toString() || "",
             gender: reg.gender || "",
             address: reg.address || "",
-            ministry: reg.ministry_interest || "",
-            hearAbout: reg.hear_about || "",
+            ministry: reg.ministry || "",
+            hearAbout: reg.hearAbout || "",
             status: reg.status,
-            submittedAt: reg.submitted_at?.split("T")[0] || "",
+            submittedAt: reg.submittedAt?.split("T")[0] || "",
           })),
         )
       }
@@ -296,7 +296,7 @@ export default function RegistrationForm() {
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <h3 className="text-2xl font-bold text-blue-800 mb-6">Join Our Church Family</h3>
             <p className="text-gray-600 mb-6">
-              We're excited to welcome you! Please fill out this form to register with GKBJ Regency.
+              We&apos;re excited to welcome you! Please fill out this form to register with GKBJ Regency.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

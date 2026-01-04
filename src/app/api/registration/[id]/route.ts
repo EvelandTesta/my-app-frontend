@@ -86,7 +86,7 @@ export async function DELETE(
     const registrationId = parseInt(id)
 
 
-    const deleted = await prisma.registrationRequest.delete({
+    await prisma.registrationRequest.delete({
       where: { id: registrationId },
     })
 
